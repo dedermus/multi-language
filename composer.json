@@ -1,32 +1,32 @@
 {
-    "name": "laravel-admin-extensions/multi-language",
-    "description": "适用于laravel-admin的多语言支持扩展",
+    "name": "dedermus/multi-language",
+    "description": "Expanding multilingual support for Laravel open-admin-core",
     "type": "library",
-    "keywords": ["laravel-admin", "extension"],
-    "homepage": "https://github.com/laravel-admin-extensions/multi-language",
+    "keywords": ["open-admin-core", "multi-language"],
+    "homepage": "https://github.com/dedermus/multi-language",
     "license": "MIT",
     "authors": [
         {
-            "name": "wangxk",
-            "email": "wangxkww@foxmail.com"
+            "name": "dedermus",
+            "email": "dedermus@yandex.ru"
         }
     ],
     "require": {
-        "php": ">=7.0.0",
-        "encore/laravel-admin": "~1.6"
+        "php": "^8.2",
+        "dedermus/open-admin-core": "^v2.0"
     },
     "require-dev": {
         "phpunit/phpunit": "~6.0"
     },
     "autoload": {
         "psr-4": {
-            "KevinSoft\\MultiLanguage\\": "src/"
+            "OpenAdminCore\\Admin\\MultiLanguage\\": "src/"
         }
     },
     "extra": {
         "laravel": {
             "providers": [
-                "KevinSoft\\MultiLanguage\\MultiLanguageServiceProvider"
+                "OpenAdminCore\\Admin\\MultiLanguage\\MultiLanguageServiceProvider"
             ]
         }
     }

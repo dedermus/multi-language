@@ -1,6 +1,6 @@
 <?php
 
-use KevinSoft\MultiLanguage\Http\Controllers\MultiLanguageController;
+use OpenAdminCore\Admin\LockScreen\Http\Controllers\MultiLanguageController;
 use KevinSoft\MultiLanguage\MultiLanguage;
 
 Route::post('/locale', MultiLanguageController::class.'@locale');
