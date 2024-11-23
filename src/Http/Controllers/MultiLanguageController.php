@@ -1,12 +1,13 @@
 <?php
 
-namespace KevinSoft\MultiLanguage\Http\Controllers;
+namespace OpenAdminCore\Admin\MultiLanguage\Http\Controllers;
+use OpenAdminCore\Admin\Layout\Content;
 
-use Encore\Admin\Layout\Content;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Request;
-use KevinSoft\MultiLanguage\MultiLanguage;
+use OpenAdminCore\Admin\MultiLanguage\MultiLanguage;
+
 
 class MultiLanguageController extends Controller
 {

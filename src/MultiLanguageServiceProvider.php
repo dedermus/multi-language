@@ -1,10 +1,10 @@
 <?php
 
-namespace KevinSoft\MultiLanguage;
+namespace OpenAdminCore\Admin\MultiLanguage;
 
-use Encore\Admin\Facades\Admin;
+use OpenAdminCore\Admin\Facades\Admin;
 use Illuminate\Support\ServiceProvider;
-use KevinSoft\MultiLanguage\Widgets\LanguageMenu;
+use OpenAdminCore\Admin\MultiLanguage\Widgets\LanguageMenu;
 
 class MultiLanguageServiceProvider extends ServiceProvider
 {
@@ -23,7 +23,7 @@ class MultiLanguageServiceProvider extends ServiceProvider
 
         if ($this->app->runningInConsole() && $assets = $extension->assets()) {
             $this->publishes(
-                [$assets => public_path('vendor/kevinsoft/multi-language')],
+                [$assets => public_path('vendor/dedermus/multi-language')],
                 'multi-language'
             );
         }

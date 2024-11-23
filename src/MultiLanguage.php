@@ -1,8 +1,8 @@
 <?php
 
-namespace KevinSoft\MultiLanguage;
+namespace OpenAdminCore\Admin\MultiLanguage;
 
-use Encore\Admin\Extension;
+use OpenAdminCore\Admin\Extension;
 
 class MultiLanguage extends Extension
 {

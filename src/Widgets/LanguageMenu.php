@@ -1,13 +1,10 @@
 <?php
 
-
-namespace KevinSoft\MultiLanguage\Widgets;
-
+namespace OpenAdminCore\Admin\MultiLanguage\Widgets;
 
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Support\Facades\Cookie;
-use Illuminate\Support\Facades\Log;
-use KevinSoft\MultiLanguage\MultiLanguage;
+use OpenAdminCore\Admin\MultiLanguage\MultiLanguage;
 
 class LanguageMenu implements Renderable
 {

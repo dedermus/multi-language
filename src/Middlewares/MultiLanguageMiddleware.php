@@ -1,18 +1,18 @@
 <?php
 
-namespace KevinSoft\MultiLanguage\Middlewares;
+namespace OpenAdminCore\Admin\MultiLanguage\Middlewares;
 
 use Closure;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Cookie;
-use KevinSoft\MultiLanguage\MultiLanguage;
+use OpenAdminCore\Admin\MultiLanguage\MultiLanguage;
 
 class MultiLanguageMiddleware
 {
     public function handle($request, Closure $next)
     {
         config(['admin.auth.excepts' => ['auth/login','locale']]);
-        
+
         $languages = MultiLanguage::config('languages');
         $cookie_name = MultiLanguage::config('cookie-name', 'locale');
 
