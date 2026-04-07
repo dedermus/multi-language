@@ -5,6 +5,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <title>{{config('admin.title')}} | {{ __('admin.login') }}</title>
         <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+        <meta name="csrf-token" content="{{ csrf_token() }}">
         @if(!is_null($favicon = Admin::favicon()))
             <link rel="shortcut icon" href="{{$favicon}}">
         @endif
@@ -66,6 +67,11 @@
                                 @endforeach
                             </select>
                         </div>
+                        @if(config('admin.auth.password_reset.enabled', true))
+                            <div class="text-center mt-3">
+                                <a href="{{ route('admin.password.request') }}">{{ __('admin.forgot_password') }}</a>
+                            </div>
+                        @endif
                     </form>
                     @endif
                 </div>

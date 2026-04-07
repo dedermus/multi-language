@@ -5,41 +5,43 @@ namespace OpenAdminCore\Admin\MultiLanguage\Widgets;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Support\Facades\Cookie;
 use OpenAdminCore\Admin\MultiLanguage\MultiLanguage;
+use OpenAdminCore\Admin\MultiLanguage\Enums\Locale;
 
-/**
- * Класс LanguageMenu
- *
- * Этот класс отвечает за рендеринг меню выбора языка
- * для функции мультиязычности OpenAdmin.
- */
 class LanguageMenu implements Renderable
 {
-    /**
-     * Рендеринг меню языков.
-     *
-     * Этот метод получает текущий язык из куки или использует
-     * язык по умолчанию, если куки не установлены. Затем он рендерит
-     * представление меню языков с доступными языками и текущим языком.
-     *
-     * @return string Рендеренный HTML меню языков.
-     */
     public function render(): string
     {
-        // Получение языка по умолчанию из конфигурации
-        $current = MultiLanguage::config('default');
+        $config = MultiLanguage::config();
 
-        // Получение имени куки из конфигурации
-        $cookieName = MultiLanguage::config('cookie-name', 'locale');
+        $current = $config['default'] ?? 'en';
+        $cookieName = $config['cookie-name'] ?? 'locale';
 
-        // Проверка, установлена ли куки языка, и обновление текущего языка
+        // Получаем текущую локаль из cookie
         if (Cookie::has($cookieName)) {
-            $current = Cookie::get($cookieName);
+            $cookieValue = Cookie::get($cookieName);
+            if (array_key_exists($cookieValue, $config['languages'] ?? [])) {
+                $current = $cookieValue;
+            }
         }
 
-        // Получение доступных языков из конфигурации
-        $languages = MultiLanguage::config("languages");
+        // Формируем массив языков
+        $languages = [];
+        foreach (($config['languages'] ?? []) as $code => $name) {
+            $locale = Locale::tryFrom($code);
+            $languages[$code] = [
+                'name' => $locale?->label() ?? $name,
+                'flag' => $locale?->flag(),
+                'direction' => $locale?->direction() ?? 'ltr',
+            ];
+        }
 
-        // Рендеринг представления меню языков с доступными языками и текущим языком
-        return view("multi-language::language-menu", compact('languages', 'current'))->render();
+        // Получаем объект Locale для текущего языка
+        $currentLocale = Locale::tryFrom($current);
+
+        return view("multi-language::language-menu", [
+            'languages' => $languages,
+            'current' => $current,
+            'currentLocale' => $currentLocale
+        ])->render();
     }
 }
