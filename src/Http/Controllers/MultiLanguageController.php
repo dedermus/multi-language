@@ -148,7 +148,7 @@ class MultiLanguageController extends Controller
 //            'current' => $current
 //        ]);
         return view('admin::login', [
-            'languages' => Locale::cases(),
+            'languages' => $languages,
             'current' => $current
         ]);
     }

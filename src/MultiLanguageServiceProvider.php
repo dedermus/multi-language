@@ -82,26 +82,6 @@ class MultiLanguageServiceProvider extends ServiceProvider
 
         // Регистрация CSS и JS ассетов
         $this->registerAssets();
-
-        // Расширяем стандартный шаблон логина из ядра
-        $this->extendLoginTemplate();
-    }
-
-    protected function extendLoginTemplate()
-    {
-        // Используем метод composer, чтобы передать данные в секцию
-        view()->composer('admin::login', function ($view) {
-            // Передаем список языков в основной шаблон, если их там еще нет
-            if (!$view->offsetExists('languages')) {
-                $view->with('languages', Locale::cases());
-            }
-        });
-
-        // Регистрируем секцию, которая будет вставлена в @yield('admin.login.language_selector')
-        // Для этого нужно переопределить секцию. Это можно сделать через начало буферизации.
-        $this->app['view']->creator('admin::login', function ($view) {
-            $view->prepend('admin.login.language_selector', view('multi-language::partials.login-language-selector')->render());
-        });
     }
 
     /**
