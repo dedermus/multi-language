@@ -109,12 +109,9 @@ laravel-packages/multi-language/
 │   ├── 📂 assets/
 │   │   ├── 📂 js/
 │   │   │   └── 📄 multilanguage.js
-│   │   ├── 📂 css/
-│   │   │   └── 📄 multilanguage.css
-│   │   └── 📂 images/
-│   │       ├── 📄 image_1.png
-│   │       ├── 📄 image_2.png
-│   │       └── 📄 image_3.png
+│   │   └── 📂 css/
+│   │       └── 📄 multilanguage.css
+│   │  
 │   ├── 📂 lang/
 │   │   ├── 📂 en/
 │   │   │   └── 📄 multi-language.php
@@ -122,8 +119,9 @@ laravel-packages/multi-language/
 │   │       └── 📄 multi-language.php
 │   │
 │   └── 📂 views/
-│       ├── 📄 language-menu.blade.php
-│       └── 📄 login.blade.php
+│       │   └── 📂 partials/
+│       │       └── 📄 login-language-selector.blade.php
+│       └── 📄 language-menu.blade.php
 │
 ├── 📂 routes/
 │   └── 📄 web.php
@@ -252,9 +250,6 @@ laravel-packages/multi-language/
 - Стили для .language.loading
 - Анимация spin для загрузки
 ```
-📂 assets/images/
-Скриншоты для документации
-
 📂 views/
 📄 language-menu.blade.php
 ```blade
@@ -264,12 +259,11 @@ laravel-packages/multi-language/
 - Активный класс для текущего языка
 - Без JS (чистый HTML)
 ```
-📄 login.blade.php
+📂 views/partials/
+📄 login-language-selector.blade.php
 ```blade
-- Кастомная страница входа
+- Частично встраиваемый список стран из Enum lkz страницs входа
 - meta[name="csrf-token"] для CSRF
-- Preloader элемент
-- Форма логина с сохранением данных
 - Select для выбора языка
 - Подключение multilanguage.js
 ```
@@ -583,6 +577,15 @@ App::setLocale($locale);
 <!-- Использование языковых файлов -->
 {{ __('messages.welcome') }}
 ```
+```blade
+{{-- Проверка на существование --}}
+<!-- НАЧАЛО: Блок для выбора языка (будет подставлен из пакета multi-language) -->
+@if(View::exists('multi-language::partials.login-language-selector'))
+    @include('multi-language::partials.login-language-selector')
+@endif
+<!-- КОНЕЦ: Блок для выбора языка -->
+```
+
 ## <a name="api"></a>🌐 **REST API**
 
 Пакет предоставляет полноценное REST API для управления мультиязычностью.
@@ -1105,7 +1108,7 @@ composer lint
 
 ## 📞 Поддержка
 * GitHub Issues: Создать issue
-* Email: lomovtsev.ab@plinor.ru
+* Email: dedermus@gmail.com
 * Документация: Wiki
 
 ## 🎉 Благодарности
