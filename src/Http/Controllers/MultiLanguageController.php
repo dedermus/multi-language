@@ -7,6 +7,7 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Cookie;
+use OpenAdminCore\Admin\MultiLanguage\Enums\Locale;
 use OpenAdminCore\Admin\MultiLanguage\MultiLanguage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
@@ -142,8 +143,12 @@ class MultiLanguageController extends Controller
         $duration = microtime(true) - $startTime;
         $this->logPerformance('login_page_render', $duration);
 
-        return view('multi-language::login', [
-            'languages' => $languages,
+//        return view('multi-language::login', [
+//            'languages' => $languages,
+//            'current' => $current
+//        ]);
+        return view('admin::login', [
+            'languages' => Locale::cases(),
             'current' => $current
         ]);
     }
